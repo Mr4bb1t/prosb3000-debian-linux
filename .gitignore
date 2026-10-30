@@ -22,3 +22,5 @@ super.fex
 cache.fex
 *.tar.gz
 *.tar.xz
+
+release_info.json
