@@ -1,0 +1,24 @@
+# Logs and temporary files
+*.log
+*.raw
+__pycache__/
+*.tmp
+screencheck*.png
+test_*.png
+now*.png
+term*.png
+after_*.png
+magisk.png
+fb_dump.raw
+fb_screenshot.png
+tv_current.png
+restored.png
+
+# Large binary firmware images (provided via GitHub Releases)
+*.img
+*.zip
+!tools/*.zip
+super.fex
+cache.fex
+*.tar.gz
+*.tar.xz

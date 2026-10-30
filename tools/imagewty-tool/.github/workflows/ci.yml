@@ -1,0 +1,38 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential clang-format python3
+
+      - name: Verify committed demo images
+        run: make check-fixtures
+
+      - name: Check code formatting
+        run: |
+          make format
+          git diff --exit-code || (echo "Code is not formatted. Run 'make format' locally." && exit 1)
+
+      - name: Build
+        run: make
+
+      - name: Run tests
+        run: make test
+
+      - name: Build with sanitizers
+        run: make -j4 debug
+
+      - name: Test sanitized build
+        run: ASAN_OPTIONS=detect_leaks=0:exitcode=99 UBSAN_OPTIONS=halt_on_error=1:exitcode=98 make test-debug

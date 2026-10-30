@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name="home_path">/root</string>
+    <string name="initialcommand">su -c "sh /data/entrar-linux.sh"</string>
+    <string name="fontsize">24</string>
+    <string name="color">1</string>
+    <string name="actionbar">0</string>
+    <string name="statusbar">0</string>
+</map>

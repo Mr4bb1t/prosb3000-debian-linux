@@ -1,0 +1,24 @@
+#!/bin/sh
+# ==============================================================================
+# PROSB-3000 / H313 SERVER - REATIVAR SAIDA HDMI E CONSOLE TERMINAL
+# Compativel com terminal local, SSH (Debian chroot) e shell do Android
+# ==============================================================================
+
+export PATH=/system/bin:/system/xbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+
+# 1. Remove trava do watchdog
+rm -f /data/hdmi_disabled 2>/dev/null
+
+# 2. Reativa o motor de display Allwinner (DE2.0)
+echo 1 > /sys/class/disp/disp/attr/runtime_enable 2>/dev/null
+
+# 3. Reativa a saida de video HDMI (unblank fb0)
+echo 0 > /sys/class/graphics/fb0/blank 2>/dev/null
+svc power stayon true 2>/dev/null
+
+# 4. Inicia o terminal interativo do servidor na TV
+am start -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n jackpal.androidterm/.Term 2>/dev/null
+
+echo "==============================================================================="
+echo " [OK] SAIDA HDMI E CONSOLE TERMINAL REATIVADOS NA TV!"
+echo "==============================================================================="

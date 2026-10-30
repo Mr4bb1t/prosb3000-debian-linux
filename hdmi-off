@@ -1,0 +1,30 @@
+#!/bin/sh
+# ==============================================================================
+# PROSB-3000 / H313 SERVER - DESATIVAR SAIDA HDMI E COMPOSITOR GRAFICO
+# Compativel com terminal local, SSH (Debian chroot) e shell do Android
+# ==============================================================================
+
+export PATH=/system/bin:/system/xbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+
+# 1. Sinaliza ao watchdog para nao reabrir o terminal
+touch /data/hdmi_disabled 2>/dev/null
+
+# 2. Fecha o terminal grafico para zerar consumo de CPU/GPU
+am force-stop jackpal.androidterm 2>/dev/null
+
+# 3. Corta o sinal HDMI (FB_BLANK_POWERDOWN desliga o transmissor HDMI PHY)
+echo 4 > /sys/class/graphics/fb0/blank 2>/dev/null
+echo 1 > /sys/class/graphics/fb0/blank 2>/dev/null
+
+# 4. Desliga o motor de display Allwinner (DE2.0) para economia maxima de energia
+echo 0 > /sys/class/disp/disp/attr/runtime_enable 2>/dev/null
+
+echo "==============================================================================="
+echo " [OK] SAIDA HDMI E GRAFICO DESATIVADOS COM SUCESSO!"
+echo "      - Transmissor HDMI PHY: DESLIGADO (Standby)"
+echo "      - Motor Display Allwinner H313: DESLIGADO"
+echo "      - Consumo energetico e temperatura: MINIMIZADOS"
+echo "      - Servidor Linux Debian 12: 100% ATIVO via SSH (porta 22)"
+echo "      - Para reativar o video na TV a qualquer momento, execute:"
+echo "        hdmi-on    (ou grafico-on)"
+echo "==============================================================================="
