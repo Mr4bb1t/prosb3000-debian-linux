@@ -303,4 +303,4 @@ D:\PROSB3000_BACKUP\PROSB3000_SERVER_LINUX_TERMINAL.img
 
 ---
 
-*Desenvolvido e Otimizado por Antigravity IDE - 2026.*
+*Desenvolvido e Otimizado por R4BB1T - 2026.*
