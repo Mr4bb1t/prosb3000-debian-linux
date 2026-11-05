@@ -200,10 +200,7 @@ Métricas coletadas diretamente do sistema em execução na placa:
 Abra o terminal do seu computador (Windows PowerShell, Linux ou macOS) e digite:
 ```bash
 ssh root@<IP_DA_TV_BOX>
-```
-*Exemplo com o IP padrão atual:*
-```bash
-ssh root@192.168.1.49
+
 ```
 - **Porta:** `22` (padrão)
 - **Senha:** `root`
